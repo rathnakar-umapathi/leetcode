@@ -1,0 +1,26 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        StringBuffer result = new StringBuffer();
+        if(s != null && s.length() > 0 && numRows > 0){
+            if(numRows > s.length() || numRows == 1)
+                return s;
+            StringBuffer[] rows = new StringBuffer[numRows];
+            int rowInd = 0;
+            int next = -1;
+            for(int i = 0 ; i < s.length(); i++){
+                StringBuffer row = rows[rowInd];
+                if(row == null)
+                    row = new StringBuffer();
+                row.append(s.charAt(i));
+                rows[rowInd] = row;                
+                if(rowInd == 0 || rowInd == numRows-1)
+                    next = next*-1;
+                rowInd = rowInd+next;                
+            }
+            for(StringBuffer row : rows){
+                result.append(row.toString());
+            }                     
+        }
+        return result.toString();
+    }
+}
