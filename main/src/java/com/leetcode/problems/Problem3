@@ -1,0 +1,23 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if(s != null && s.length() > 0){
+            int ans = 1;
+            boolean[] seen = new boolean[128];
+            int start = 0;
+            int end = 0;
+            while(end < s.length()){
+                char c = s.charAt(end);
+                if(!seen[c]){
+                    ans = Math.max(ans, end-start+1);
+                    end++;
+                    seen[c] = true;                    
+                }else{
+                    seen[s.charAt(start)] = false;
+                    start++;
+                }
+            }
+            return ans;
+        }
+        return 0;
+    }
+}
