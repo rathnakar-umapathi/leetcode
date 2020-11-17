@@ -1,0 +1,32 @@
+class Solution {
+    String[] ones = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
+    String[] teens = {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+    String[] tens = {"", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+    
+    public String numberToWords(int num) {
+        if(num < 0)
+            return "";
+        if(num == 0)
+            return "Zero";
+        return convertToString(num);
+    }
+    private String convertToString(int num){
+        String ans = "";    
+        if(num < 10)
+            ans = ones[num];
+        else if(num < 20)
+            ans = teens[num-10];
+        else if(num < 100)
+            ans = tens[num/10] + " " + convertToString(num%10);
+        else if(num < 1000)
+            ans = convertToString(num/100) + " Hundred " + convertToString(num%100);
+        else if(num < 1000000)
+            ans = convertToString(num/1000) + " Thousand " + convertToString(num%1000);
+        else if(num < 1000000000)
+            ans = convertToString(num/1000000) + " Million " + convertToString(num%1000000);
+        else
+            ans = convertToString(num/1000000000) + " Billion " + convertToString(num%1000000000);
+        
+        return ans.trim(); 
+    }
+}
